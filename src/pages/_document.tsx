@@ -32,9 +32,12 @@ export default class MyDocument extends Document {
       <Html lang='fr'>
         <Head>
           <link rel='preload' href='/fonts/Bellefair/Bellefair-Regular.ttf' as='font' crossOrigin='' />
-          <link rel='preload' href='/fonts/Barlow/BarlowCondensed-Bold.ttf' as='font' crossOrigin='' />
-          <link rel='preload' href='/fonts/Barlow/BarlowCondensed-SemiBold.ttf' as='font' crossOrigin='' />
-          <link rel='preload' href='/fonts/Barlow/BarlowCondensed-Regular.ttf' as='font' crossOrigin='' />
+          <link rel='preload' href='/fonts/Barlow/Barlow-Bold.ttf' as='font' crossOrigin='' />
+          <link rel='preload' href='/fonts/Barlow/Barlow-SemiBold.ttf' as='font' crossOrigin='' />
+          <link rel='preload' href='/fonts/Barlow/Barlow-Regular.ttf' as='font' crossOrigin='' />
+          <link rel='preload' href='/fonts/BarlowCondensed/BarlowCondensed-Bold.ttf' as='font' crossOrigin='' />
+          <link rel='preload' href='/fonts/BarlowCondensed/BarlowCondensed-SemiBold.ttf' as='font' crossOrigin='' />
+          <link rel='preload' href='/fonts/BarlowCondensed/BarlowCondensed-Regular.ttf' as='font' crossOrigin='' />
         </Head>
         <body>
         <Main />

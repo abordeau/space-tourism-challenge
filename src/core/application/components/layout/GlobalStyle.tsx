@@ -19,6 +19,13 @@ const GlobalStyle = createGlobalStyle`
     #__next {
         min-height: 100dvh
     }
+
+    button {
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
 `
 
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { NextPage } from 'next'
 import Link from 'next/link'
+import { breakpoints } from '@/styles/breakpoints'
+import { Routes } from '@/core/application/constants/routes'
 
 const Home: NextPage = () => {
   return (
@@ -18,7 +20,7 @@ const Home: NextPage = () => {
             of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!
           </Content>
         </TextWrapper>
-        <ExploreButton href='/destinations'>
+        <ExploreButton href={Routes.DESTINATION_PAGE('moon')}>
           Explore
         </ExploreButton>
       </Wrapper>
@@ -31,75 +33,122 @@ export default Home
 
 const Container = styled.div`
     flex: 1;
-    padding: 25rem 16.5rem 0 16.5rem;
+
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
     height: 100%;
+    padding: 4.8rem 2rem;
     //background-image: url('/assets/home/background-home-desktop.jpg')
+
+    @media ${breakpoints.laptop} {
+        padding: 0rem 16.5rem 13rem 16.5rem;
+    }
 
 `
 
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 8rem;
+
+    @media ${breakpoints.laptop} {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 `
 
 const TextWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    row-gap: 2.4rem;
-    max-width: 44.4rem;
+    row-gap: 1.6rem;
+    justify-content: center;
+    align-items: center;
+
+    @media ${breakpoints.laptop} {
+        row-gap: 2.4rem;
+        justify-content: unset;
+        align-items: unset;
+        max-width: 44.4rem;
+    }
 `
 
 
 const Intro = styled.div`
     text-transform: uppercase;
-    letter-spacing: 0.4rem;
-    font-size: ${({ theme }) => theme.size.heading5};
     font-family: ${({ theme }) => theme.font.barlow};
+    font-size: ${({ theme }) => theme.size.subHeading3};
+
+
+    @media ${breakpoints.laptop} {
+        font-size: ${({ theme }) => theme.size.heading5};
+        letter-spacing: 0.4rem;
+    }
+
 `
 
 
 const Title = styled.div`
     text-transform: uppercase;
-    font-size: 15rem;
     color: ${({ theme }) => theme.color.white};
+    font-size: 8rem;
+    line-height: 10rem;
+
+    @media ${breakpoints.laptop} {
+        font-size: 15rem;
+        line-height: normal;
+    }
 
 `
 
 const Content = styled.div`
-    line-height: 32px;
     font-family: ${({ theme }) => theme.font.barlow};
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+
+    @media ${breakpoints.laptop} {
+        font-size: ${({ theme }) => theme.size.text};
+        line-height: 32px;
+    }
 `
 
 
 const ExploreButton = styled(Link)`
     flex-shrink: 0;
-    width: 27.4rem;
-    height: 27.4rem;
+    width: 15rem;
+    height: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: ${({ theme }) => theme.color.white};
     border-radius: 50%;
-    padding: 6.2rem;
+    padding: 2.7rem;
     text-decoration: none;
-    
     cursor: pointer;
-
     color: ${({ theme }) => theme.color.primary};
-    font-size: ${({ theme }) => theme.size.heading4};
     text-transform: uppercase;
     transition: all 200ms ease-out;
-    outline-width: 8.8rem;
-    outline-style: solid;;
-    outline-color: rgba(255, 255, 255, 0);
 
-    &:hover {
-        outline-color: rgba(255, 255, 255, 0.1);
+
+    @media ${breakpoints.laptop} {
+        width: 27.4rem;
+        height: 27.4rem;
+        padding: 6.2rem;
+        font-size: ${({ theme }) => theme.size.heading4};
+
+        outline-width: 8.8rem;
+        outline-style: solid;;
+        outline-color: rgba(255, 255, 255, 0);
+
+        &:hover {
+            outline-color: rgba(255, 255, 255, 0.1);
+        }
+
     }
+
+
 
 `

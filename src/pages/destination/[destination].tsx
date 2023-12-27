@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import DestinationSelector from '@/core/application/components/destinations/DestinationSelector'
 import { useRouter } from 'next/router'
+import { AnimatePresence, motion } from 'framer-motion'
+import { breakpoints } from '@/styles/breakpoints'
+import { Routes } from '@/core/application/constants/routes'
+import PageTitle from '@/core/application/components/common/PageTitle'
 
 export interface IDestinationPageProps {
   destination: {
@@ -14,10 +18,11 @@ export interface IDestinationPageProps {
   }
 }
 
-const DestinationPage: React.FC<IDestinationPageProps> = ({ destination }) => {
+const DestinationPage: NextPage<IDestinationPageProps> = ({ destination }) => {
   const router = useRouter()
   const handleOnClick = async (value: string) => {
-    await router.replace(`/destinations/${value}`)
+    const nextRoute = Routes.DESTINATION_PAGE(value)
+    await router.replace(nextRoute)
   }
 
   return (
@@ -26,7 +31,21 @@ const DestinationPage: React.FC<IDestinationPageProps> = ({ destination }) => {
         <span>01</span>Pick your destination
       </PageTitle>
       <Wrapper>
-        <ImageWrapper>
+        <ImageWrapper
+          key={destination.distance}
+          initial={{
+            opacity: 0.5,
+            scale: 0.9
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1
+          }}
+          transition={{
+            ease: 'easeOut',
+            duration: 0.5
+          }}
+        >
           <img src={`/assets/destination/${destination.image}.webp`} />
         </ImageWrapper>
         <DestinationInformationSection>
@@ -35,9 +54,20 @@ const DestinationPage: React.FC<IDestinationPageProps> = ({ destination }) => {
             selectedValue={destination.name}
             onClick={handleOnClick}
           />
-          <DestinationName>
-            {destination.name}
-          </DestinationName>
+          <AnimatePresence mode='wait'>
+            <DestinationName
+              key={destination.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 1 }}
+              transition={{
+                ease: 'easeOut',
+                duration: 0.6
+              }}
+            >
+              {destination.name}
+            </DestinationName>
+          </AnimatePresence>
           <DestinationInfo>
             {destination.info}
           </DestinationInfo>
@@ -70,44 +100,68 @@ export default DestinationPage
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    row-gap: 6.4rem;
-    padding: 1rem 16.5rem;
-`
+    align-items: center;
+    row-gap: 3rem;
+    padding: 2.5rem;
 
-
-const PageTitle = styled.h1`
-    text-transform: uppercase;
-    font-family: ${({ theme }) => theme.font.barlow};
-    font-size: ${({ theme }) => theme.size.heading5};
-    letter-spacing: 4.725px;
-    color: ${({ theme }) => theme.color.white};
-
-    & > span {
-        opacity: 0.25;
-        margin-right: 2.8rem;
+    @media ${breakpoints.laptop} {
+        row-gap: 6.4rem;
+        padding: 7.6rem 16.5rem 5rem 16.5rem;
+        align-items: flex-start;
     }
 `
 
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    row-gap: 3.5rem;
     justify-content: space-between;
+    width: 100%;
+
+    @media ${breakpoints.laptop} {
+        flex-direction: row;
+    }
 `
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(motion.div)`
+    margin: auto;
+    width: 17rem;
+    height: 17rem;
 
+    @media ${breakpoints.laptop} {
+        width: 40rem;
+        height: 40rem;
+    }
+`
+
+const MobileImageWrapper = styled(motion.div)`
+    display: block;
+
+    @media ${breakpoints.laptop} {
+        display: none;
+    }
 `
 
 const DestinationInformationSection = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     color: ${({ theme }) => theme.color.white};
+
+    @media ${breakpoints.laptop} {
+        align-items: flex-start;
+    }
 `
 
-const DestinationName = styled.div`
-    font-size: 10rem;
+const DestinationName = styled(motion.div)`
+    font-size: 5.6rem;
     text-transform: uppercase;
-    margin-top: 3.7rem;
+    margin-top: 2rem;
+
+    @media ${breakpoints.laptop} {
+        font-size: 10rem;
+        margin-top: 3.7rem;
+    }
 `
 
 const DestinationInfo = styled.div`
@@ -115,7 +169,15 @@ const DestinationInfo = styled.div`
     max-width: 44rem;
     color: ${({ theme }) => theme.color.secondary};
     font-family: ${({ theme }) => theme.font.barlow};
-    line-height: 3.2rem;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+
+    @media ${breakpoints.laptop} {
+        line-height: 3.2rem;
+        text-align: left;
+        font-size: ${({ theme }) => theme.size.text};
+    }
 
 `
 

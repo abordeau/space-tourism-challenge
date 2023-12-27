@@ -1,3 +1,4 @@
+import { breakpoints } from '@/styles/breakpoints'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -25,7 +26,11 @@ export default DestinationSelector
 const Container = styled.div`
     display: flex;
     flex-direction: row;
-    column-gap: 3.5rem;
+    column-gap: 2.6rem;
+
+    @media ${breakpoints.laptop} {
+        column-gap: 3.5rem;
+    }
 
 `
 

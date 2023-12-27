@@ -21,6 +21,7 @@ declare module 'styled-components' {
     font: {
       default: string
       barlow: string
+      barlowCondensed: string
     }
     weight: {
       normal: number
@@ -49,7 +50,8 @@ const AppTheme: DefaultTheme = {
   },
   font: {
     default: 'Bellefair',
-    barlow: 'Barlow Condensed'
+    barlow: 'Barlow',
+    barlowCondensed: 'Barlow Condensed'
   },
   weight: {
     normal: 400,
