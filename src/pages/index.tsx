@@ -36,13 +36,13 @@ const Container = styled.div`
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-around;
     height: 100%;
-    padding: 4.8rem 2rem;
-    //background-image: url('/assets/home/background-home-desktop.jpg')
+    padding: 0 2rem;
 
     @media ${breakpoints.laptop} {
         padding: 0rem 16.5rem 13rem 16.5rem;
+        justify-content: flex-end;
     }
 
 `
