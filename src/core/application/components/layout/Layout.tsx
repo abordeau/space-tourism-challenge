@@ -36,7 +36,6 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
       <Wrapper id='layoutWrapper'>
         {children}
       </Wrapper>
-
     </Container>
   )
 }
@@ -86,9 +85,6 @@ const Container = styled.div`
             background-image: url('/assets/technology/background-technology-desktop.jpg')
         }
     }
-
-
-
 `
 
 
@@ -96,4 +92,8 @@ const Wrapper = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+
+    & > div {
+        flex: 1;
+    }
 `

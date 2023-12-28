@@ -32,10 +32,10 @@ const DestinationPage: NextPage<IDestinationPageProps> = ({ destination }) => {
       </PageTitle>
       <Wrapper>
         <ImageWrapper
-          key={destination.distance}
+          key={destination.name}
           initial={{
-            opacity: 0.5,
-            scale: 0.9
+            opacity: 0.6,
+            scale: 0.8
           }}
           animate={{
             opacity: 1,
@@ -48,48 +48,49 @@ const DestinationPage: NextPage<IDestinationPageProps> = ({ destination }) => {
         >
           <img src={`/assets/destination/${destination.image}.webp`} />
         </ImageWrapper>
-        <DestinationInformationSection>
+        <DestinationDataSection>
           <DestinationSelector
             values={['moon', 'mars', 'titan', 'europa']}
             selectedValue={destination.name}
             onClick={handleOnClick}
           />
           <AnimatePresence mode='wait'>
-            <DestinationName
+            <DestinationDataWrapper
               key={destination.name}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{
                 ease: 'easeOut',
-                duration: 0.6
-              }}
-            >
-              {destination.name}
-            </DestinationName>
+                duration: 0.5
+              }}>
+              <DestinationName>
+                {destination.name}
+              </DestinationName>
+              <DestinationInfo>
+                {destination.info}
+              </DestinationInfo>
+              <DestinationBottomRow>
+                <DataColumn>
+                  <div className='label'>
+                    AVG. DISTANCE
+                  </div>
+                  <div className='value'>
+                    {destination.distance}
+                  </div>
+                </DataColumn>
+                <DataColumn>
+                  <div className='label'>
+                    Est. travel time
+                  </div>
+                  <div className='value'>
+                    {destination.travelTime}
+                  </div>
+                </DataColumn>
+              </DestinationBottomRow>
+            </DestinationDataWrapper>
           </AnimatePresence>
-          <DestinationInfo>
-            {destination.info}
-          </DestinationInfo>
-          <DestinationBottomRow>
-            <DataColumn>
-              <div className='label'>
-                AVG. DISTANCE
-              </div>
-              <div className='value'>
-                {destination.distance}
-              </div>
-            </DataColumn>
-            <DataColumn>
-              <div className='label'>
-                Est. travel time
-              </div>
-              <div className='value'>
-                {destination.travelTime}
-              </div>
-            </DataColumn>
-          </DestinationBottomRow>
-        </DestinationInformationSection>
+        </DestinationDataSection>
       </Wrapper>
     </Container>
   )
@@ -103,7 +104,7 @@ const Container = styled.div`
     align-items: center;
     row-gap: 3rem;
     padding: 2.5rem;
-
+    
     @media ${breakpoints.laptop} {
         row-gap: 6.4rem;
         padding: 7.6rem 16.5rem 5rem 16.5rem;
@@ -134,15 +135,7 @@ const ImageWrapper = styled(motion.div)`
     }
 `
 
-const MobileImageWrapper = styled(motion.div)`
-    display: block;
-
-    @media ${breakpoints.laptop} {
-        display: none;
-    }
-`
-
-const DestinationInformationSection = styled.div`
+const DestinationDataSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,7 +146,12 @@ const DestinationInformationSection = styled.div`
     }
 `
 
-const DestinationName = styled(motion.div)`
+const DestinationDataWrapper = styled(motion.div)`
+    display: flex;
+    flex-direction: column;
+`
+
+const DestinationName = styled.div`
     font-size: 5.6rem;
     text-transform: uppercase;
     margin-top: 2rem;

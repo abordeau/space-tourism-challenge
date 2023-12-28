@@ -47,6 +47,7 @@ const Entry = styled.div`
     min-width: 4rem;
 
     cursor: pointer;
+    transition: all 200ms ease-out;
 
     &.selected {
         border-color: ${({ theme }) => theme.color.white};
